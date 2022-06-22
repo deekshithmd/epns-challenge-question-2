@@ -1,0 +1,24 @@
+.loader-container{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loader {
+    width: 5rem;
+    height: 5rem;
+    border: 1rem solid red;
+    border-top: 1rem solid green;
+    border-radius: 50%;
+    animation: loader 2s linear infinite;
+}
+
+@keyframes loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}

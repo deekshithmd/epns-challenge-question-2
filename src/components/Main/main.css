@@ -1,0 +1,17 @@
+.main{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 20rem auto;
+    grid-template-areas: "sidebar content";
+}
+
+.content{
+    grid-area: content;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    padding: 5px;
+}
