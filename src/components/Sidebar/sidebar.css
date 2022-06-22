@@ -1,16 +1,29 @@
-.filter-bar{
-    position: sticky;
-    top: 6rem;
+.sidebar-container {
     grid-area: sidebar;
-    width: 20rem;
+    position: sticky;
+    top: 4.5rem;
+    height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.sidebar {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 2rem 5rem;
+
 }
 
-.clear-btn{
+.clear-btn {
     padding: 5px 10px;
     border-radius: 5px;
     font-size: 15px;
+}
+
+button,
+input,
+label {
+    cursor: pointer;
 }

@@ -1,6 +1,6 @@
 import "./navigation.css"
 export const Navigation=()=>{
     return <div className="navigation">
-        <h2>Products</h2>
+        <h2 className="logo">Productkart</h2>
     </div>
 }

@@ -1,8 +1,4 @@
-import "./loader.css"
-export const Loader=()=>{
-    return(
-        <div className="loader-container">
-            <span className="loader"></span>
-        </div>
-    )
-}
+import "./loader.css";
+export const Loader = () => {
+  return <span className="loader"></span>;
+};

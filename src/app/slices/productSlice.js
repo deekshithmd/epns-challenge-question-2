@@ -4,12 +4,12 @@ import axios from "axios";
 const initialState = {
   products: [],
   filteredProducts: [],
-  categoryNames:[],
+  categoryList: [],
+  ratingList: [1, 2, 3, 4, 4.5],
+  selectedCategories: [],
+  priceFilterValue: 2000,
+  selectedRating: 0,
   loading: false,
-  categories: [],
-  priceValue: 2000,
-  rating: 0,
-  ratings: [1, 2, 3, 4, 4.5],
 };
 
 export const getProducts = createAsyncThunk(
@@ -18,8 +18,8 @@ export const getProducts = createAsyncThunk(
     try {
       const response = await axios.get("https://dummyjson.com/products");
       return response.data.products;
-    } catch (e) {
-      return thunkAPI.rejectedValue(e);
+    } catch (error) {
+      return thunkAPI.rejectedValue(error);
     }
   }
 );
@@ -28,29 +28,31 @@ const productSlice = createSlice({
   name: "products",
   initialState,
   reducers: {
-    setCategories:(state,action)=>{
-        state.categoryNames=action.payload
+    setCategories: (state, action) => {
+      state.categoryList = action.payload;
     },
-    filtered: (state, action) => {
+    setFilteredProducts: (state, action) => {
       state.filteredProducts = action.payload;
     },
     removeFilter: (state, action) => {
-      state.categories = state.categories.filter((item) => item !== action.payload);
+      state.selectedCategories = state.selectedCategories.filter(
+        (item) => item !== action.payload
+      );
     },
-    resetFilters: (state) => {
+    addFilter: (state, action) => {
+      state.selectedCategories = [...state.selectedCategories, action.payload];
+    },
+    clearFilters: (state) => {
       state.filteredProducts = [...state.products];
-      state.categories = [];
-      state.rating=0;
-      state.priceValue=2000;
+      state.selectedCategories = [];
+      state.selectedRating = 0;
+      state.priceFilterValue = 2000;
     },
-    setFilter: (state, action) => {
-      state.categories = [...state.categories, action.payload];
-    },
-    setPriceValue: (state, action) => {
-      state.priceValue = action.payload;
+    setPriceFilterValue: (state, action) => {
+      state.priceFilterValue = action.payload;
     },
     setRating: (state, action) => {
-      state.rating = action.payload;
+      state.selectedRating = action.payload;
     },
   },
   extraReducers: {
@@ -69,13 +71,13 @@ const productSlice = createSlice({
 });
 
 export const {
-  filtered,
-  setFilter,
-  setPriceValue,
-  setRating,
+  setFilteredProducts,
+  addFilter,
   removeFilter,
-  resetFilters,
-  setCategories
+  setPriceFilterValue,
+  setRating,
+  clearFilters,
+  setCategories,
 } = productSlice.actions;
 
 export default productSlice.reducer;

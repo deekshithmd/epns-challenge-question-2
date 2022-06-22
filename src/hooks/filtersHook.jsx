@@ -1,76 +1,65 @@
-import { filtered, resetFilters } from "../app/slices/productSlice";
+import { setFilteredProducts, clearFilters } from "../app/slices/productSlice";
 import { useDispatch } from "react-redux";
 
 export const useFilters = () => {
+  
   const dispatch = useDispatch();
 
-  const getFiltered = ({ categories, products, rating, priceValue }) => {
-
-    const price = products.filter(
-      (item) => Number.parseFloat(item.price) <= Number.parseFloat(priceValue)
+  const getFiltered = ({
+    selectedCategories,
+    products,
+    selectedRating,
+    priceFilterValue,
+  }) => {
+    const priceFiltered = products.filter(
+      (item) =>
+        Number.parseFloat(item.price) <= Number.parseFloat(priceFilterValue)
     );
 
-    const rate = price.filter(
-      (item) => Number.parseFloat(item.rating) >= Number.parseFloat(rating)
+    const rateFiltered = priceFiltered.filter(
+      (item) =>
+        Number.parseFloat(item.rating) >= Number.parseFloat(selectedRating)
     );
 
-    const cat =
-      categories?.length > 0
-        ? [...rate].filter((item) =>
-            categories.some((prod) => prod === item.category)
+    const categoryFiltered =
+      selectedCategories?.length > 0
+        ? [...rateFiltered].filter((product) =>
+            selectedCategories.some((category) => category === product.category)
           )
-        : [...rate];
+        : [...rateFiltered];
 
-    dispatch(filtered(cat));
+    dispatch(setFilteredProducts(categoryFiltered));
   };
 
-  const getPriceSorted = ({ action, data, value }) => {
-    const result =
+  const getPriceSorted = ({ action, data }) => {
+    const sortResult =
       action === "low-to-high"
         ? [...data].sort((a, b) => a.price - b.price)
         : action === "high-to-low"
         ? [...data].sort((a, b) => b.price - a.price)
         : [...data];
-    // : [...data].filter(
-    //     (item) => Number.parseFloat(item.price) <= Number.parseFloat(value)
-    //   );
-    dispatch(filtered(result));
+    dispatch(setFilteredProducts(sortResult));
   };
 
-  const getRatingFiltered = ({ action, data, rating }) => {
-    const result =
+  const getRatingSorted = ({ action, data }) => {
+    const ratingSortResult =
       action === "popularity"
-        ? [...data].sort((a, b) => b.rating - a.rating)
+        ? [...data].sort(
+            (product1, product2) => product1.rating - product2.rating
+          )
         : [...data];
 
-    // [...data].filter(
-    //   (item) =>
-    //     Number.parseFloat(item.rating) >= Number.parseFloat(rating)
-    // );
-
-    dispatch(filtered(result));
+    dispatch(setFilteredProducts(ratingSortResult));
   };
 
-  // const getCategoryFiltered = (filters,filteredProducts) => {
-  //   const result =
-  //     filters.length > 0
-  //       ? [...filteredProducts].filter((item) =>
-  //           filters.some((prod) => prod === item.category)
-  //         )
-  //       : [...filteredProducts];
-  //   dispatch(filtered(result));
-  //   console.log("filters", result);
-  // };
-
-  const clearFilters = () => {
-    dispatch(resetFilters());
+  const clearFilteredData = () => {
+    dispatch(clearFilters());
   };
 
   return {
     getPriceSorted,
-    getRatingFiltered,
-    // getCategoryFiltered,
+    getRatingSorted,
     getFiltered,
-    clearFilters,
+    clearFilteredData,
   };
 };

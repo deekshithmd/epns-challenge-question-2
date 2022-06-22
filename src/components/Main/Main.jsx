@@ -1,8 +1,6 @@
 import "./main.css";
 import { useEffect } from "react";
-import { Loader } from "../Loader/Loader";
-import { ProductCard } from "../ProductCard/ProductCard";
-import { Sidebar } from "../Sidebar/Sidebar";
+import { ProductCard, Sidebar, Loader } from "..";
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "../../app/slices/productSlice";
 export const Main = () => {
@@ -13,20 +11,19 @@ export const Main = () => {
   }, []);
   return (
     <div className="main">
-      {loading ? (
-        <Loader />
-      ) : (
-        <>
-          <div className="sidebar">
-            <Sidebar />
-          </div>
-          <div className="content">
-            {filteredProducts?.map((item, index) => (
+      <Sidebar />
+      <div className="content">
+        <h1>Products({filteredProducts?.length})</h1>
+        <div className="product-list">
+          {loading ? (
+            <Loader />
+          ) : (
+            filteredProducts?.map((item, index) => (
               <ProductCard props={item} key={index} />
-            ))}
-          </div>
-        </>
-      )}
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 };

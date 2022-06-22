@@ -4,6 +4,13 @@
     height: 10rem;
     border: 1px solid black;
     padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.product-card:hover{
+    transform: scale(1.02);
+    box-shadow: 0 0 10px rgb(133, 131, 131);
 }
 
 .image-container {
@@ -24,4 +31,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+
+.product-title{
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-title,
+.product-price,
+.product-rating {
+    margin: 0;
+}
+
+button{
+    padding: 5px 0;
 }

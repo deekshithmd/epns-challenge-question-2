@@ -7,8 +7,9 @@ export const ProductCard = ({ props }) => {
       </div>
       <div className="product-data">
         <h4 className="product-title">{props.title}</h4>
-        <p>$. {props.price}</p>
-        <p>Rating: {props.rating}</p>
+        <p className="product-price">Price: $. {props.price}</p>
+        <p className="product-rating">Rating: {props.rating}</p>
+        <button className="add-cart-btn">Add to Cart</button>
       </div>
     </div>
   );
