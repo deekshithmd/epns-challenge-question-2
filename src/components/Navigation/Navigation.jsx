@@ -23,6 +23,7 @@ export const Navigation = () => {
         product.description.toLowerCase().includes(query.toLowerCase()) ||
         product.brand.toLowerCase().includes(query.toLowerCase())
     );
+    console.log(result)
     dispatch(setFilteredProducts(result));
   };
 
