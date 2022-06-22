@@ -6,9 +6,11 @@ import { getProducts } from "../../app/slices/productSlice";
 export const Main = () => {
   const dispatch = useDispatch();
   const { filteredProducts, loading } = useSelector((state) => state.products);
+
   useEffect(() => {
     dispatch(getProducts());
   }, []);
+  
   return (
     <div className="main">
       <Sidebar />

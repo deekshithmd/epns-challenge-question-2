@@ -35,7 +35,7 @@ export const Sidebar = () => {
     );
     const uniqueCategories = [...new Set(category)];
     dispatch(setCategories(uniqueCategories));
-  }, [products]);
+  }, [products,filteredProducts]);
 
   useEffect(() => {
     getFiltered({
