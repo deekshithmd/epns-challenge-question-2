@@ -91,7 +91,7 @@ export const Sidebar = () => {
         <label>
           <input
             type="radio"
-            name="rate-sort"
+            name="rate-filter"
             onChange={() =>
               getRatingSorted({
                 action: "popularity",
@@ -106,7 +106,7 @@ export const Sidebar = () => {
             <label key={index}>
               <input
                 type="radio"
-                name="rate-sort"
+                name="rate-filter"
                 onChange={() => dispatch(setRating(rating))}
               />{" "}
               {rating} and above
