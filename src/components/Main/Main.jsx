@@ -10,19 +10,21 @@ export const Main = () => {
   useEffect(() => {
     dispatch(getProducts());
   }, []);
-  
+
   return (
     <div className="main">
       <Sidebar />
       <div className="content">
-        <h1>Products({filteredProducts?.length})</h1>
+        <h3>Products({filteredProducts?.length})</h3>
         <div className="product-list">
           {loading ? (
             <Loader />
-          ) : (
+          ) : filteredProducts?.length > 0 ? (
             filteredProducts?.map((item, index) => (
               <ProductCard props={item} key={index} />
             ))
+          ) : (
+            <h2>No products found</h2>
           )}
         </div>
       </div>

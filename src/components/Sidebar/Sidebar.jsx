@@ -27,6 +27,7 @@ export const Sidebar = () => {
   const dispatch = useDispatch();
 
   const [category, setCategory] = useState([]);
+
   useEffect(() => {
     products?.map((item) =>
       category.indexOf(item.category) !== -1
@@ -35,7 +36,7 @@ export const Sidebar = () => {
     );
     const uniqueCategories = [...new Set(category)];
     dispatch(setCategories(uniqueCategories));
-  }, [products,filteredProducts]);
+  }, [products, filteredProducts]);
 
   useEffect(() => {
     getFiltered({
@@ -64,7 +65,7 @@ export const Sidebar = () => {
             max={2000}
             onChange={(e) => dispatch(setPriceFilterValue(e.target.value))}
           />
-          $. {priceFilterValue}
+          $.{priceFilterValue}
         </label>
         <h3>Price Sort</h3>
         <label>
